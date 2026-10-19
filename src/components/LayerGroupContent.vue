@@ -114,12 +114,14 @@ function getUniqueId() {
 <template>
   <LayerUpsertPage
     v-if="currentUpsertOption != 'none'"
+    class="lightbox"
+    id="layer-upsert-page"
     :defaultName="layerToUpdate?.name ?? ''"
     :defaultCategory="layerToUpdate?.category ?? ''"
     @confirm="confirmUpsert"
     @cancel="resetUpsert"
   />
-  <div v-else>
+  <div>
     <div id="header">
       <label for="check-all">全選</label>
       <input
@@ -129,7 +131,9 @@ function getUniqueId() {
         @input="toggleSelectAll"
       />
       <button :disabled="!isSomeSelected" @click="deleteLayer">刪除圖層</button>
-      <button @click="startInsert">新增圖層</button>
+      <a href="#layer-upsert-page"
+        ><button @click="startInsert">新增圖層</button>
+      </a>
     </div>
     <hr />
     <div id="body">
@@ -168,7 +172,9 @@ function getUniqueId() {
               {{ dayjs(layer.createTime).format('YYYY/MM/DD HH:mm') }}
             </td>
             <td class="center">
-              <button @click="startUpdate(layer)">編輯</button>
+              <a href="#layer-upsert-page">
+                <button @click="startUpdate(layer)">編輯</button>
+              </a>
             </td>
           </tr>
         </tbody>
